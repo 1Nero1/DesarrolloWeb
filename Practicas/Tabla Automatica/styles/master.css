@@ -80,3 +80,7 @@ img{
 .form_input:focus +.form_label{ /*REMEMBER: buscar mas inf*/
     margin-top: -135px;
 }
+/* esta clase hara que el texto que escribamos quede fija en el input*/
+.fijar{
+    margin-top: -135px;
+}
