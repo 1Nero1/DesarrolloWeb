@@ -56,12 +56,27 @@ img{
 /* Acomodandp los input */
 .form_input{
     padding: 20px 0px;
-    /* REMEMBER: Buscar */
-    border: 1px solid rgba(0,0,0,0.3);
+    border: 1px solid rgba(0,0,0,0.3); /* REMEMBER: Buscar */
     margin-bottom: 40px;
+    background: transparent; /* soluciona el error de tapar al label*/
 }
-.form_label{ /* aquitengo error */
+.form_label{
     padding-left: 15px;
     position: absolute;
     margin-top: -85px;
+    z-index: -20; /*Ayuda a que podamos escribir nuevamente pero tapa al label */
+    color: rgba(0,0,0,0.5);
+    transition: all 0.2s; /* Esta parte funciona con la animacion*/
+}
+
+.form_btn{
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer; /* REMEMBER: Buscar */
+    border-radius: 15px;
+}
+/* animacion de label hacia arriba */
+.form_input:focus +.form_label{ /*REMEMBER: buscar mas inf*/
+    margin-top: -135px;
 }
