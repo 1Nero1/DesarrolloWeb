@@ -19,17 +19,28 @@
         </section>
         <sectionc class="contenedor_Form">
             <div class="env_Datos">
-                <form action="#" class="formulario">
+                <form action="#" id="formulario" class="formulario">
                     <h2 class="form_Titulo">Tabla</h2>
-                    <input type="text" class="form_input">
-                    <label for="" class="form_label">
-                        Ingresa el numero de columnas:
-                    </label>
-                    <input type="text" class="form_input">
-                    <label for="" class="form_label">
-                        Ingresa el numero de filas:
-                    </label>
-                    <button class="form_btn">Enviar</button>
+                    <div class="cont_Colunas">
+                        <input type="text" class="form_input" name="columnas">
+                        <label for="" class="form_label">
+                            Ingresa el numero de columnas:
+                        </label>
+                        <p class="form_input_error"><b>X Error:</b> Ingrese sólo números</p>
+                    </div>
+                    <div class="cont_Filas">
+                        <input type="text" class="form_input" name="filas">
+                        <label for="" class="form_label">
+                            Ingresa el numero de filas:
+                        </label>
+                        <p class="form_input_error"><b>X Error:</b> Ingrese sólo números</p>
+                    </div>
+                    <div class="form_Mess_Error">
+                        <p class="mess_Error"> <b>X Error:</b> Por favor rellene los datos corectamente</p>
+                    </div>
+                    <div class="cont_Form_btn">
+                        <button type="submit" class="form_btn">Enviar</button>
+                    </div>
                 </form>
             </div>
         </section>

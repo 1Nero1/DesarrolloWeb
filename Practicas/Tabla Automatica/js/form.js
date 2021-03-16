@@ -1,14 +1,29 @@
 // ###Variables###
 let inputs;
-let numero;
+const expresiones = {
+	usuario: /^[a-zA-Z0-9\_\-]{4,16}$/, // Letras, numeros, guion y guion_bajo
+	nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
+	password: /^.{4,12}$/, // 4 a 12 digitos.
+	correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+	telefono: /^\d{1,14}$/ // 7 a 14 numeros.
+}
+let formulario;
 
 // ###Etiquetas HTML###
-inputs = document.getElementsByClassName("form_input");
-console.log(inputs);
+inputs = document.querySelectorAll(".form_input");
+formulario = document.querySelector("#formulario");
 
-numero = inputs.length;
-// console.log(`el numero de inputs es: ${numero}`);
 // ###Eventos###
+// Eviar datos
+formulario.addEventListener('submit',(event)=>{
+    event.preventDefault(); // Este evento evita que se envien datos del formulario
+});
+
+// Evento que se este escribiendo
+inputs.forEach((input)=>{
+    input.addEventListener('keyup', validaFormulario);
+    input.addEventListener('blur', validaFormulario);
+});
 
 // ###Validaciones###
 // Valida que el documento este listo
@@ -16,7 +31,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     console.log('Documento Listo');
 });
 
-//Validacion del formulario (no sobreescribirse)
+// Validacion del formulario (no sobreescribirse)
 for(let i = 0; i < inputs.length; i++){
     inputs[i].addEventListener('keyup',()=>{
         if(inputs[i].value.length>=1){ // indicamos que en input donde estamos debe tener por lo menos un caracter
@@ -26,4 +41,29 @@ for(let i = 0; i < inputs.length; i++){
             inputs[i].nextElementSibling.classList.remove('fijar');
         }
     });
+}
+
+// Validacionde inputs
+function validaFormulario(e) {
+    switch (e.target.name) { //en este punto estamos ingresando a los input y obteniendo su nombre
+        case "columnas": // solo colocamos los input que vamos a validar
+            campInput(expresiones.telefono,e.target,'Colunas');
+        break;
+        case "filas":
+            campInput(expresiones.telefono,e.target,'Filas');
+        break;
+        default:
+            console.log("Aqui hay un error");
+        break;
+    }
+}
+
+// Validando campo del input
+function campInput(expresion,input,campo) {
+    if(expresion.test(input.value)){ // Validamos que lo que este dentro del input concuerde con lo que necesitemos de expreciones 
+        document.querySelector(`.cont_${campo} .form_input_error`).classList.remove('form_input_error_Activo');
+    }
+    else{
+        document.querySelector(`.cont_${campo} .form_input_error`).classList.add('form_input_error_Activo');
+    }
 }
