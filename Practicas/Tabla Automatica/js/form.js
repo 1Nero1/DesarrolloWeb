@@ -8,6 +8,10 @@ const expresiones = {
 	telefono: /^\d{1,14}$/ // 7 a 14 numeros.
 }
 let formulario;
+const camposLlenos = { //indica que los campos o inputs no tienen datos
+    Colunas: false,
+    Filas: false
+};
 
 // ###Etiquetas HTML###
 inputs = document.querySelectorAll(".form_input");
@@ -17,6 +21,16 @@ formulario = document.querySelector("#formulario");
 // Eviar datos
 formulario.addEventListener('submit',(event)=>{
     event.preventDefault(); // Este evento evita que se envien datos del formulario
+    if(camposLlenos.Colunas && camposLlenos.Filas){
+        formulario.reset();
+        console.log('Hola');
+    }
+    else{
+        document.querySelector('.form_Mess_Error ').classList.add('form_Mess_Error_Activo');
+        setTimeout(()=>{
+            document.querySelector('.form_Mess_Error ').classList.remove('form_Mess_Error_Activo');
+        }, 5000); // Tiempo que muestre el mensaje
+    }
 });
 
 // Evento que se este escribiendo
@@ -62,8 +76,13 @@ function validaFormulario(e) {
 function campInput(expresion,input,campo) {
     if(expresion.test(input.value)){ // Validamos que lo que este dentro del input concuerde con lo que necesitemos de expreciones 
         document.querySelector(`.cont_${campo} .form_input_error`).classList.remove('form_input_error_Activo');
+        camposLlenos[campo] = true;
     }
     else{
         document.querySelector(`.cont_${campo} .form_input_error`).classList.add('form_input_error_Activo');
+        setTimeout(()=>{ // no ayuda a que se quite el mensaje despues de 5s 
+            document.querySelector(`.cont_${campo} .form_input_error`).classList.remove('form_input_error_Activo');
+        },5000);
+        camposLlenos[campo] = false;
     }
 }
