@@ -106,3 +106,26 @@ img{
 .form_Mess_Error_Activo{
     display: block;
 }
+
+/* ===Tabla=== */
+.tabla h2{
+    text-align: center;
+}
+#tablaMuestra{
+    margin: auto; /* Centra nuestra tabla */
+    width: 100%; /* Da tamaño uniforme a la tabla */
+}
+.tabla__muestra, .tabla__fila, .tabla__columna, .columna__encabezado{
+    background-color: royalblue;
+    border: 1px solid black;
+    text-align: center;
+}
+.tabla__fila, .tabla__columna{
+    padding: 15px;
+}
+.tabla__fila{
+    background-color: yellow;
+}
+.tabla__columna{
+    background-color: turquoise;
+}
