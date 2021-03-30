@@ -12,6 +12,9 @@ const camposLlenos = { //indica que los campos o inputs no tienen datos
     Colunas: false,
     Filas: false
 };
+let numColumnas;
+let numFilas;
+let contTabla;
 
 // ###Etiquetas HTML###
 inputs = document.querySelectorAll(".form_input");
@@ -22,8 +25,10 @@ formulario = document.querySelector("#formulario");
 formulario.addEventListener('submit',(event)=>{
     event.preventDefault(); // Este evento evita que se envien datos del formulario
     if(camposLlenos.Colunas && camposLlenos.Filas){
+        console.log("no borra nada");
+        crearTabla();
         formulario.reset();
-        console.log('Hola');
+        console.log('se borro');
     }
     else{
         document.querySelector('.form_Mess_Error ').classList.add('form_Mess_Error_Activo');
@@ -32,6 +37,25 @@ formulario.addEventListener('submit',(event)=>{
         }, 5000); // Tiempo que muestre el mensaje
     }
 });
+
+function crearTabla(){
+    numColumnas = document.querySelector(".cont_Colunas .form_input").value;
+    numFilas = document.querySelector(".cont_Filas .form_input").value;
+    contTabla = document.querySelector(".cont__tabla");
+
+    // REMEMBER: optimizar a una mejor forma la creacion de HTML automatico
+    contTabla.innerHTML = "";
+    let tabla = `<table id="tablaMuestra" class="tabla__muestra">`;
+    for(let i=0; i<numColumnas; i++){
+        tabla +=`<tr class="tabla__fila">`;
+        for(let j=0; j<numFilas; j++){
+            tabla += `<td class="tabla__columna">${i},${j}</td>`
+        }
+        tabla +="</tr>";
+    }
+    tabla += "</table>"
+    contTabla.innerHTML = tabla;
+}
 
 // Evento que se este escribiendo
 inputs.forEach((input)=>{
